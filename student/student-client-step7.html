@@ -1,273 +1,180 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
     <title>학생 관리 시스템</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
-        
-        h1 {
-            color: #333;
-            text-align: center;
-        }
-        
-        h2 {
-            color: #444;
-            border-bottom: 2px solid #007bff;
-            padding-bottom: 5px;
-        }
-        
-        form {
-            background-color: white;
-            padding: 20px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #555;
-        }
-        
-        input {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 3px;
-        }
-        
-        button {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-        
-        button:hover {
-            background-color: #0056b3;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: white;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-        
-        th, td {
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        
-        th {
-            background-color: #f8f9fa;
-            color: #333;
-        }
-        
-        tr:hover {
-            background-color: #f5f5f5;
-        }
-        
-        .form-container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-        }
-        
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .form-group label {
-            margin-bottom: 5px;
-        }
-        
-        .form-group input {
-            margin-bottom: 0;
-        }
-        
-        .table-container {
-            background-color: white;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-    </style>
-</head>
-<body>
+  </head>
+  <body>
     <h1>학생 관리 시스템</h1>
-    
+
     <div class="form-container">
-        <h2>학생 등록</h2>
-        <form id="studentForm">
-            <div class="form-grid">
-                <div class="form-group">
-                    <label>이름:</label>
-                    <input type="text" name="name" required>
-                </div>
-                
-                <div class="form-group">
-                    <label>학번:</label>
-                    <input type="text" name="studentNumber" required>
-                </div>
-                
-                <div class="form-group">
-                    <label>주소:</label>
-                    <input type="text" name="address" required>
-                </div>
-                
-                <div class="form-group">
-                    <label>전화번호:</label>
-                    <input type="tel" name="phoneNumber" required>
-                </div>
-                
-                <div class="form-group">
-                    <label>이메일:</label>
-                    <input type="email" name="email">
-                </div>
-                
-                <div class="form-group">
-                    <label>생년월일:</label>
-                    <input type="date" name="dateOfBirth">
-                </div>
-            </div>
-            
-            <button type="submit">학생 등록</button>
-        </form>
+      <h2>학생 등록</h2>
+      <form id="studentForm">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="name">이름:</label>
+            <input type="text" name="name" id="name" />
+          </div>
+
+          <div class="form-group">
+            <label for="studentNumber">학번:</label>
+            <input type="text" name="studentNumber" id="studentNumber" />
+          </div>
+
+          <div class="form-group">
+            <label for="address">주소:</label>
+            <input type="text" name="address" id="address" />
+          </div>
+
+          <div class="form-group">
+            <label for="phoneNumber">전화번호:</label>
+            <input
+              type="text"
+              name="phoneNumber"
+              id="phoneNumber"
+              placeholder="00*-000*-0000"
+              pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="email">이메일:</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="***@***.***"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="dateOfBirth">생년월일:</label>
+            <input type="date" name="dateOfBirth" id="dateOfBirth" />
+          </div>
+        </div>
+
+        <button type="submit">학생 등록</button>
+      </form>
     </div>
-    
+
     <div class="table-container">
-        <h2>학생 목록</h2>
-        <table id="studentTable">
-            <thead>
-                <tr>
-                    <th>이름</th>
-                    <th>학번</th>
-                    <th>주소</th>
-                    <th>전화번호</th>
-                    <th>이메일</th>
-                    <th>생년월일</th>
-                    <th>액션</th>
-                </tr>
-            </thead>
-            <tbody id="studentTableBody">
-            </tbody>
-        </table>
+      <h2>학생 목록</h2>
+      <table id="studentTable">
+        <thead>
+          <tr>
+            <th>이름</th>
+            <th>학번</th>
+            <th>주소</th>
+            <th>전화번호</th>
+            <th>이메일</th>
+            <th>생년월일</th>
+            <th>액션</th>
+          </tr>
+        </thead>
+        <tbody id="studentTableBody"></tbody>
+      </table>
     </div>
-    
+
     <script>
-        // 전역 변수
-        const API_BASE_URL = 'http://localhost:8080';
-        
-        // DOM 요소 참조
-        const studentForm = document.getElementById('studentForm');
-        const studentTableBody = document.getElementById('studentTableBody');
-        
-        // 초기화
-        document.addEventListener('DOMContentLoaded', function() {
-            loadStudents();
-        });
-        
-        // 폼 제출 이벤트 핸들러
-        studentForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // 폼 데이터 수집
-            const formData = new FormData(studentForm);
-            const studentData = {
-                name: formData.get('name').trim(),
-                studentNumber: formData.get('studentNumber').trim(),
-                address: formData.get('address').trim(),
-                phoneNumber: formData.get('phoneNumber').trim(),
-                email: formData.get('email').trim(),
-                dateOfBirth: formData.get('dateOfBirth')
-            };
-            
-            // 유효성 검사
-            if (!validateStudent(studentData)) {
-                return;
-            }
-            
-            console.log('유효한 데이터:', studentData);
-        });
-        
-        // 학생 데이터 유효성 검사
-        function validateStudent(student) {
-            // 필수 필드 검사
-            if (!student.name) {
-                alert('이름을 입력해주세요.');
-                return false;
-            }
-            
-            if (!student.studentNumber) {
-                alert('학번을 입력해주세요.');
-                return false;
-            }
-            
-            if (!student.address) {
-                alert('주소를 입력해주세요.');
-                return false;
-            }
-            
-            if (!student.phoneNumber) {
-                alert('전화번호를 입력해주세요.');
-                return false;
-            }
-            
-            // 학번 형식 검사 (예: 영문과 숫자 조합)
-            const studentNumberPattern = /^[A-Za-z0-9]+$/;
-            if (!studentNumberPattern.test(student.studentNumber)) {
-                alert('학번은 영문과 숫자만 입력 가능합니다.');
-                return false;
-            }
-            
-            // 전화번호 형식 검사
-            const phonePattern = /^[0-9-\s]+$/;
-            if (!phonePattern.test(student.phoneNumber)) {
-                alert('올바른 전화번호 형식이 아닙니다.');
-                return false;
-            }
-            
-            // 이메일 형식 검사 (입력된 경우에만)
-            if (student.email && !isValidEmail(student.email)) {
-                alert('올바른 이메일 형식이 아닙니다.');
-                return false;
-            }
-            
-            return true;
+      // 전역 변수
+      const API_BASE_URL = "http://localhost:8080";
+
+      // DOM 요소 참조
+      const studentForm = document.getElementById("studentForm");
+      const studentTableBody = document.getElementById("studentTableBody");
+
+      // 초기화
+      document.addEventListener("DOMContentLoaded", function () {
+        loadStudents();
+      });
+
+      // 폼 제출 이벤트 핸들러
+      studentForm.addEventListener("submit", function (e) {
+        console.log("form submit");
+        e.preventDefault();
+
+        // 폼 데이터 수집
+        const formData = new FormData(studentForm);
+        const studentData = {
+          name: formData.get("name").trim(),
+          studentNumber: formData.get("studentNumber").trim(),
+          address: formData.get("address").trim(),
+          phoneNumber: formData.get("phoneNumber").trim(),
+          email: formData.get("email").trim(),
+          dateOfBirth: formData.get("dateOfBirth"),
+        };
+
+        // 유효성 검사
+        if (!validateStudent(studentData)) {
+          return;
         }
-        
-        // 이메일 유효성 검사
-        function isValidEmail(email) {
-            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailPattern.test(email);
+
+        console.log("유효한 데이터:", studentData);
+      });
+
+      // 학생 데이터 유효성 검사
+      function validateStudent(student) {
+        // 필수 필드 검사
+        if (!student.name) {
+          alert("이름을 입력해주세요.");
+          return false;
         }
-        
-        // 학생 목록 로드 함수
-        function loadStudents() {
-            console.log('학생 목록 로드 중...');
+
+        if (!student.studentNumber) {
+          alert("학번을 입력해주세요.");
+          return false;
         }
+
+        if (!student.address) {
+          alert("주소를 입력해주세요.");
+          return false;
+        }
+
+        if (!student.phoneNumber) {
+          alert("전화번호를 입력해주세요.");
+          return false;
+        }
+
+        if (!student.email) {
+          alert("이메일을 입력해주세요.");
+          return false;
+        }
+
+        // 학번 형식 검사 (예: 영문과 숫자 조합)
+        const studentNumberPattern = /^[A-Za-z0-9]+$/;
+        if (!studentNumberPattern.test(student.studentNumber)) {
+          alert("학번은 영문과 숫자만 입력 가능합니다.");
+          return false;
+        }
+
+        // 전화번호 형식 검사
+        const phonePattern = /^[0-9-\s]+$/;
+        if (!phonePattern.test(student.phoneNumber)) {
+          alert("올바른 전화번호 형식이 아닙니다.");
+          return false;
+        }
+
+        // 이메일 형식 검사 (입력된 경우에만)
+        if (student.email && !isValidEmail(student.email)) {
+          alert("올바른 이메일 형식이 아닙니다.");
+          return false;
+        }
+
+        return true;
+      }
+
+      // 이메일 유효성 검사
+      function isValidEmail(email) {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailPattern.test(email);
+      }
+
+      // 학생 목록 로드 함수
+      function loadStudents() {
+        console.log("학생 목록 로드 중...");
+      }
     </script>
-</body>
+  </body>
 </html>

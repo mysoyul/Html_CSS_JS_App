@@ -18,3 +18,18 @@
 * 로딩 상태 표시
 * 수정 모드와 등록 모드 전환
 * 입력 필드별 실시간 유효성 검사
+
+#### 각 Step 별 기능:
+1. step1 - html 만 작성
+2. step2 - form 내부의 input 과 table 에 CSS 추가
+3. step3 - input 을 class가 form-group, form-grid인 div 로 감싸준다.
+4. step4 - form-group, form-grid css 를 추가한다.
+5. step5 - table에 id=studentTable, tbody에 id="studentTableBody" 추가한다.
+6. step6 
+    - javascript DOMContentLoaded 이벤트 처리추가
+    - style code를 main.css로 분리함
+7. step7 
+    - 입력항목 체크하는 js 추가
+    - input 엘리먼트에 required 속성 제거함
+8. step8
+    - js에 서버와 통신하는 fetch 함수추가     
