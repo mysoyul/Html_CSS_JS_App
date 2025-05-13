@@ -37,4 +37,8 @@
     - get api/students 호출하기
 9. step9
     - student 등록
-    - post api/students 호출하기         
+    - post api/students 호출하기    
+10. step10
+    - student 삭제
+    - delete api/students 호출하기    
+
