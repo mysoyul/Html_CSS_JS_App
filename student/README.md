@@ -32,4 +32,9 @@
     - 입력항목 체크하는 js 추가
     - input 엘리먼트에 required 속성 제거함
 8. step8
-    - js에 서버와 통신하는 fetch 함수추가     
+    - js에 서버와 통신하는 fetch 함수추가
+    - table에 목록 출력하기
+    - get api/students 호출하기
+9. step9
+    - student 등록
+    - post api/students 호출하기         
