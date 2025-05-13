@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>학생 관리 시스템</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        
+        h2 {
+            color: #444;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+        }
+        
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+        
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group label {
+            margin-bottom: 5px;
+        }
+        
+        .form-group input {
+            margin-bottom: 0;
+        }
+        
+        .table-container {
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <h1>학생 관리 시스템</h1>
+    
+    <div class="form-container">
+        <h2>학생 등록</h2>
+        <form id="studentForm">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>이름:</label>
+                    <input type="text" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>학번:</label>
+                    <input type="text" name="studentNumber" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>주소:</label>
+                    <input type="text" name="address" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>전화번호:</label>
+                    <input type="tel" name="phoneNumber" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>이메일:</label>
+                    <input type="email" name="email">
+                </div>
+                
+                <div class="form-group">
+                    <label>생년월일:</label>
+                    <input type="date" name="dateOfBirth">
+                </div>
+            </div>
+            
+            <button type="submit">학생 등록</button>
+        </form>
+    </div>
+    
+    <div class="table-container">
+        <h2>학생 목록</h2>
+        <table id="studentTable">
+            <thead>
+                <tr>
+                    <th>이름</th>
+                    <th>학번</th>
+                    <th>주소</th>
+                    <th>전화번호</th>
+                    <th>이메일</th>
+                    <th>생년월일</th>
+                    <th>액션</th>
+                </tr>
+            </thead>
+            <tbody id="studentTableBody">
+            </tbody>
+        </table>
+    </div>
+    
+    <script>
+        // 전역 변수
+        const API_BASE_URL = 'http://localhost:8080';
+        
+        // DOM 요소 참조
+        const studentForm = document.getElementById('studentForm');
+        const studentTableBody = document.getElementById('studentTableBody');
+        
+        // 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            loadStudents();
+        });
+        
+        // 폼 제출 이벤트 핸들러
+        studentForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            console.log('폼 제출됨');
+        });
+        
+        // 학생 목록 로드 함수
+        function loadStudents() {
+            console.log('학생 목록 로드 중...');
+        }
+    </script>
+</body>
+</html>
