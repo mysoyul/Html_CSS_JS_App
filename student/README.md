@@ -20,35 +20,31 @@
 * 입력 필드별 실시간 유효성 검사
 
 #### 각 Step 별 기능:
-1. step1 - html 만 작성
-2. step2 - form 내부의 input 과 table 에 CSS 추가
-3. step3 - input 을 class가 form-group, form-grid인 div 로 감싸준다.
-4. step4 - form-group, form-grid css 를 추가한다.
-5. step5 - table에 id=studentTable, tbody에 id="studentTableBody" 추가한다.
-6. step6 
-    - javascript DOMContentLoaded 이벤트 처리추가
-    - style code를 main.css로 분리함
-7. step7 
-    - 입력항목 체크하는 js 추가
-    - input 엘리먼트에 required 속성 제거함
-8. step8
-    - js에 서버와 통신하는 fetch 함수추가
-    - table에 목록 출력하기
-    - get api/students 호출하기
-9. step9
-    - student 등록
-    - post api/students 호출하기    
-10. step10
-    - student 삭제
-    - delete api/students 호출하기    
-11. step11
-    - student 수정처리를 하기 위한 첫번째 단계
-12. step12
-    - student 수정처리를 하기 위한 두번째 단계
-    - updateStudent() 함수 선언
-13. step13
-    - student 수정처리를 하기 위한 세번째 단계
-    - updateStudent() 함수 구현
+* 1. step1 - html 만 작성
+* 2. step2 - form 내부의 input 과 table 에 CSS 추가
+* 3. step3 
+    * - input 을 class가 form-group, form-grid인 div 로 감싸준다.
+    * - form-group, form-grid css 를 추가한다.
+    * - table에 id=studentTable, tbody에 id="studentTableBody" 추가한다.
+* 4. step4 
+    * - javascript DOMContentLoaded 이벤트 처리추가
+    * - style code를 main.css로 분리함
+* 5. step5 
+    * - 입력항목 체크하는 js 추가
+    * - 입력한 데이타를 검증하는 validate() 함수 구현하기
+* 6. step6
+    * - get api/students 서버와 통신하는 loadStudents() fetch 사용
+    * - renderStudentTable() table에 목록 출력하기
+* 7. step7
+    * - studentDat 객체 구조 변경하기 및 validate() 함수 수정
+    * - post api/students 서버와 통신하는 createStudent() 함수 구현
+* 8. step8
+    * - delete api/students/1 student 삭제하는 deleteStudent() 함수 구현
+* 9. step9
+    * - student 수정하기 전에 데이터 조회 먼저하기
+    * - get api/students/1 student 조회하는 editStudent() 함수 구현
+* 10. step10
+    * - update api/students/1 student 수정처리하는 updateStudent() 함수 구현
     
 
 
