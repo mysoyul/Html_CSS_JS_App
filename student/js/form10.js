@@ -7,6 +7,8 @@ const studentForm = document.getElementById("studentForm");
 const studentTableBody = document.getElementById("studentTableBody");
 const submitButton = studentForm.querySelector('button[type="submit"]');
 
+const cancelButton = studentForm.querySelector('.cancel-btn');
+
 // 초기화
 document.addEventListener("DOMContentLoaded", function () {
     loadStudents();
@@ -46,13 +48,13 @@ studentForm.addEventListener("submit", function (e) {
 
 // 학생 생성 함수
 function createStudent(studentData) {
-        fetch(`${API_BASE_URL}/api/students`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(studentData),
-        })
+    fetch(`${API_BASE_URL}/api/students`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(studentData),
+    })
         .then(async (response) => {
             if (!response.ok) {
                 // 응답 본문을 읽어서 에러 메시지 추출
@@ -181,9 +183,9 @@ function deleteStudent(studentId) {
         return;
     }
 
-        fetch(`${API_BASE_URL}/api/students/${studentId}`, {
-            method: 'DELETE'
-        })
+    fetch(`${API_BASE_URL}/api/students/${studentId}`, {
+        method: 'DELETE'
+    })
         .then(response => {
             if (!response.ok) {
                 throw new Error('학생 삭제에 실패했습니다.');
@@ -228,6 +230,7 @@ function editStudent(studentId) {
             // 수정 모드로 설정
             editingStudentId = studentId;
             submitButton.textContent = '학생 수정';
+            cancelButton.style.display = 'inline-block';
 
             // 폼으로 스크롤
             studentForm.scrollIntoView({ behavior: 'smooth' });
@@ -241,13 +244,13 @@ function editStudent(studentId) {
 
 // 학생 수정 처리하는 함수
 function updateStudent(studentId, studentData) {
-        fetch(`${API_BASE_URL}/api/students/${studentId}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(studentData)
-        })
+    fetch(`${API_BASE_URL}/api/students/${studentId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(studentData)
+    })
         .then(async (response) => {
             if (!response.ok) {
                 // 응답 본문을 읽어서 에러 메시지 추출
@@ -281,4 +284,5 @@ function resetForm() {
     studentForm.reset();
     editingStudentId = null;
     submitButton.textContent = '학생 등록';
+    cancelButton.style.display = 'none';
 }
