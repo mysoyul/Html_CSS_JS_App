@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>학생 관리 시스템</title>
+    <link rel="stylesheet" type="text/css" href="css/form10.css" />
+</head>
+<body>
+    <h1>학생 관리 시스템</h1>
+    
+    <div class="form-container">
+        <h2>학생 등록</h2>
+        <form id="studentForm">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>이름:</label>
+                    <input type="text" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>학번:</label>
+                    <input type="text" name="studentNumber" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>주소:</label>
+                    <input type="text" name="address" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>전화번호:</label>
+                    <input type="tel" name="phoneNumber" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>이메일:</label>
+                    <input type="email" name="email">
+                </div>
+                
+                <div class="form-group">
+                    <label>생년월일:</label>
+                    <input type="date" name="dateOfBirth">
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button type="submit">학생 등록</button>
+                <button type="button" class="cancel-btn" onclick="resetForm()" style="display: none;">취소</button>
+                <span class="error-message" id="formError"></span>
+            </div>
+        </form>
+    </div>
+    
+    <div class="table-container">
+        <h2>학생 목록</h2>
+        <table id="studentTable">
+            <thead>
+                <tr>
+                    <th>이름</th>
+                    <th>학번</th>
+                    <th>주소</th>
+                    <th>전화번호</th>
+                    <th>이메일</th>
+                    <th>생년월일</th>
+                    <th>액션</th>
+                </tr>
+            </thead>
+            <tbody id="studentTableBody">
+            </tbody>
+        </table>
+    </div>
+    
+    <script src="js/form10.js"></script>
+</body>
+</html>

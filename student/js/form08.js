@@ -177,15 +177,23 @@ function deleteStudent(studentId) {
     fetch(`${API_BASE_URL}/api/students/${studentId}`, {
         method: 'DELETE'
     })
-        .then(response => {
+        .then(async (response) => {
             if (!response.ok) {
-                throw new Error('학생 삭제에 실패했습니다.');
+                // 응답 본문을 읽어서 에러 메시지 추출
+                const errorData = await response.json();
+
+                // 상태 코드와 메시지를 확인하여 적절한 에러 처리
+                if (response.status === 404) {
+                    // 중복 오류 처리
+                    throw new Error(errorData.message || "존재하지 않는 학생입니다.");
+                }
             }
             alert('학생이 성공적으로 삭제되었습니다.');
             loadStudents(); // 목록 새로고침
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('학생 삭제에 실패했습니다.');
+            //alert('학생 삭제에 실패했습니다.');
+            alert(error.message);  // 실제 서버에서 온 에러 메시지 표시
         });
 }

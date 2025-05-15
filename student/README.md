@@ -44,7 +44,13 @@
     * - student 수정하기 전에 데이터 조회 먼저하기
     * - get api/students/1 student 조회하는 editStudent() 함수 구현
 * step10
-    * - update api/students/1 student 수정처리하는 updateStudent() 함수 구현
+    * - style 추가 form10.css 동적으로 생성된 버튼의 스타일 설정하기
+    * - update api/students/1 student 수정처리 하는 updateStudent() 함수 구현
+* step11
+    * - style 추가 form10.css
+    * - update api/students/1 student 수정처리 하는 updateStudent() 함수 구현
+
+
     
 
 

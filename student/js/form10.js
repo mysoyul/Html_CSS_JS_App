@@ -46,13 +46,13 @@ studentForm.addEventListener("submit", function (e) {
 
 // 학생 생성 함수
 function createStudent(studentData) {
-    fetch(`${API_BASE_URL}/api/students`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(studentData),
-    })
+        fetch(`${API_BASE_URL}/api/students`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(studentData),
+        })
         .then(async (response) => {
             if (!response.ok) {
                 // 응답 본문을 읽어서 에러 메시지 추출
@@ -181,27 +181,19 @@ function deleteStudent(studentId) {
         return;
     }
 
-    fetch(`${API_BASE_URL}/api/students/${studentId}`, {
-        method: 'DELETE'
-    })
-        .then(async (response) => {
+        fetch(`${API_BASE_URL}/api/students/${studentId}`, {
+            method: 'DELETE'
+        })
+        .then(response => {
             if (!response.ok) {
-                // 응답 본문을 읽어서 에러 메시지 추출
-                const errorData = await response.json();
-
-                // 상태 코드와 메시지를 확인하여 적절한 에러 처리
-                if (response.status === 404) {
-                    // 중복 오류 처리
-                    throw new Error(errorData.message || "존재하지 않는 학생입니다.");
-                }
+                throw new Error('학생 삭제에 실패했습니다.');
             }
             alert('학생이 성공적으로 삭제되었습니다.');
             loadStudents(); // 목록 새로고침
         })
         .catch(error => {
             console.error('Error:', error);
-            //alert('학생 삭제에 실패했습니다.');
-            alert(error.message);  // 실제 서버에서 온 에러 메시지 표시
+            alert('학생 삭제에 실패했습니다.');
         });
 }
 
@@ -249,6 +241,44 @@ function editStudent(studentId) {
 
 // 학생 수정 처리하는 함수
 function updateStudent(studentId, studentData) {
+        fetch(`${API_BASE_URL}/api/students/${studentId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(studentData)
+        })
+        .then(async (response) => {
+            if (!response.ok) {
+                // 응답 본문을 읽어서 에러 메시지 추출
+                const errorData = await response.json();
 
+                // 상태 코드와 메시지를 확인하여 적절한 에러 처리
+                if (response.status === 409) {
+                    // Duplicate
+                    throw new Error(errorData.message || "학생정보가 중복됩니다.");
+                } else {
+                    // 기타 오류 처리
+                    throw new Error(errorData.message || "학생정보 수정에 실패했습니다.");
+                }
+            }
+            return response.json();
+        })
+        .then(result => {
+            alert('학생 정보가 성공적으로 수정되었습니다.');
+            resetForm();
+            loadStudents(); // 목록 새로고침
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            //alert('학생 정보 수정에 실패했습니다.');
+            alert(error.message);  // 실제 서버에서 온 에러 메시지 표시
+        });
 }
 
+// 폼 초기화 함수
+function resetForm() {
+    studentForm.reset();
+    editingStudentId = null;
+    submitButton.textContent = '학생 등록';
+}
