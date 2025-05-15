@@ -50,43 +50,6 @@ studentForm.addEventListener("submit", function (e) {
 
 });
 
-// 학생 생성 함수
-function createStudent(studentData) {
-    fetch(`${API_BASE_URL}/api/students`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(studentData),
-    })
-        .then(async (response) => {
-            if (!response.ok) {
-                // 응답 본문을 읽어서 에러 메시지 추출
-                const errorData = await response.json();
-
-                // 상태 코드와 메시지를 확인하여 적절한 에러 처리
-                if (response.status === 409) {
-                    // 중복 오류 처리
-                    throw new Error(errorData.message || "이미 등록된 학번입니다.");
-                } else {
-                    // 기타 오류 처리
-                    throw new Error(errorData.message || "학생 등록에 실패했습니다.");
-                }
-            }
-            return response.json();
-        })
-        .then((result) => {
-            alert("학생이 성공적으로 등록되었습니다.");
-            studentForm.reset();
-            loadStudents(); // 목록 새로고침
-        })
-        .catch((error) => {
-            console.error("Error:", error.message);
-            //alert(error.message);  // 실제 서버에서 온 에러 메시지 표시
-            showError(error.message);
-        });
-}
-
 // 학생 데이터 유효성 검사
 function validateStudent(student) {
     // 필수 필드 검사
@@ -190,6 +153,43 @@ function renderStudentTable(students) {
     });
 }
 
+// 학생 생성 함수
+function createStudent(studentData) {
+    fetch(`${API_BASE_URL}/api/students`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(studentData),
+    })
+        .then(async (response) => {
+            if (!response.ok) {
+                // 응답 본문을 읽어서 에러 메시지 추출
+                const errorData = await response.json();
+
+                // 상태 코드와 메시지를 확인하여 적절한 에러 처리
+                if (response.status === 409) {
+                    // 중복 오류 처리
+                    throw new Error(errorData.message || "이미 등록된 학번입니다.");
+                } else {
+                    // 기타 오류 처리
+                    throw new Error(errorData.message || "학생 등록에 실패했습니다.");
+                }
+            }
+            return response.json();
+        })
+        .then((result) => {
+            showSuccess("학생이 성공적으로 등록되었습니다.");
+            studentForm.reset();
+            loadStudents(); // 목록 새로고침
+        })
+        .catch((error) => {
+            console.error("Error:", error.message);
+            //alert(error.message);  // 실제 서버에서 온 에러 메시지 표시
+            showError(error.message);
+        });
+}
+
 // 학생 삭제 함수
 function deleteStudent(studentId) {
     if (!confirm('정말로 이 학생을 삭제하시겠습니까?')) {
@@ -210,7 +210,7 @@ function deleteStudent(studentId) {
                     throw new Error(errorData.message || "존재하지 않는 학생입니다.");
                 }
             }
-            alert('학생이 성공적으로 삭제되었습니다.');
+            showSuccess('학생이 성공적으로 삭제되었습니다.');
             loadStudents(); // 목록 새로고침
         })
         .catch(error => {
@@ -289,7 +289,7 @@ function updateStudent(studentId, studentData) {
             return response.json();
         })
         .then(result => {
-            alert('학생 정보가 성공적으로 수정되었습니다.');
+            showSuccess('학생 정보가 성공적으로 수정되었습니다.');
             resetForm();
             loadStudents(); // 목록 새로고침
         })

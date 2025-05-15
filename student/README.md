@@ -46,9 +46,14 @@
 * step10
     * - style 추가 form10.css 동적으로 생성된 버튼의 스타일 설정하기
     * - update api/students/1 student 수정처리 하는 updateStudent() 함수 구현
-* step11
-    * - style 추가 form10.css
-    * - update api/students/1 student 수정처리 하는 updateStudent() 함수 구현
+* step11    
+    * <span class="error-message" id="formError"></span> 태그추가
+    * const formError = document.getElementById('formError');
+    * showError() / showSuccess() / clearMessages 함수 추가
+    * resetForm() 함수 수정
+    * alert() 을 showError() 호출로 변경
+    * loadStudents() 함수에서 목록 불러오기 실패했을때 studentTableBody에 데이터를 로드 할수 없다는 tr 추가하기
+
 
 
     
