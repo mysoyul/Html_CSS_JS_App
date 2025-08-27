@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>학생 관리 시스템</title>
+    <link rel="stylesheet" type="text/css" href="css/form_studentdetail_search.css" />
+</head>
+<body>
+    <h1>학생 관리 시스템</h1>
+    
+    <div class="container">
+        <h2>학생 등록</h2>
+        <form id="studentForm">
+            <div class="form-section">
+                <h3>기본 정보</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="이름" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="text" name="studentNumber" placeholder="학번" required>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <h3>상세 정보</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <input type="text" name="address" placeholder="주소" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="tel" name="phoneNumber" placeholder="전화번호" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="이메일">
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="date" name="dateOfBirth" placeholder="생년월일">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button type="submit">학생 등록</button>
+                <button type="button" class="cancel-btn" onclick="StudentManager.resetForm()" style="display: none;">취소</button>
+            </div>
+        </form>
+    </div>
+    
+    <div class="container">
+        <h2>학생 검색</h2>
+        <div class="search-bar">
+            <input type="text" id="searchName" placeholder="이름으로 검색">
+            <input type="text" id="searchStudentNumber" placeholder="학번으로 검색">
+            <input type="text" id="searchAddress" placeholder="주소로 검색">
+            <button id="searchBtn">검색</button>
+            <button id="showAllBtn">전체 보기</button>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h2>학생 목록</h2>
+        <div id="loadingMessage" class="loading" style="display: none;">
+            로딩 중...
+        </div>
+        <table id="studentTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>이름</th>
+                    <th>학번</th>
+                    <th>주소</th>
+                    <th>전화번호</th>
+                    <th>이메일</th>
+                    <th>생년월일</th>
+                    <th>액션</th>
+                </tr>
+            </thead>
+            <tbody id="studentTableBody">
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 상세 정보 모달 -->
+    <div id="detailModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="detailModalClose">&times;</span>
+            <h2>학생 상세 정보</h2>
+            <div id="studentDetailContent">
+                <!-- 상세 정보가 여기에 표시됩니다 -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- 수정 모달 -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="editModalClose">&times;</span>
+            <h2>학생 수정</h2>
+            <form id="editForm">
+                <input type="hidden" id="editId">
+                
+                <!-- 기본 정보 수정 -->
+                <div class="form-section">
+                    <h3>기본 정보</h3>
+                    <div class="form-grid">
+                        <input type="text" id="editName" placeholder="이름" required>
+                        <input type="text" id="editStudentNumber" placeholder="학번" required>
+                    </div>
+                </div>
+                
+                <!-- 상세 정보 수정 -->
+                <div class="form-section">
+                    <h3>상세 정보</h3>
+                    <div class="form-grid">
+                        <input type="text" id="editAddress" placeholder="주소" required>
+                        <input type="tel" id="editPhoneNumber" placeholder="전화번호" required>
+                        <input type="email" id="editEmail" placeholder="이메일">
+                        <input type="date" id="editDateOfBirth">
+                    </div>
+                </div>
+                
+                <div class="button-group">
+                    <button type="submit">학생 수정</button>
+                    <button type="button" onclick="StudentManager.closeEditModal()">취소</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/form_studentdetail_search.js"></script>
+</body>
+</html>

@@ -1,0 +1,376 @@
+/* body 태그에 전체 페이지의 기본 스타일을 설정합니다 */
+body {
+    font-family: 'Malgun Gothic', '맑은 고딕', Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+/* 메인 제목(h1)의 스타일을 설정합니다 */
+h1 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* 부제목(h2)의 스타일을 설정합니다 */
+h2 {
+    color: #555;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+}
+
+/* h3 스타일 추가 */
+h3 {
+    color: #666;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+/* 컨테이너 스타일 - 도서 관리 시스템과 동일하게 */
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* 폼 섹션 스타일 - 도서 관리 시스템과 동일하게 */
+.form-section {
+    margin-bottom: 25px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    border-left: 4px solid #007bff;
+}
+
+/* 폼(form) 요소의 기본 스타일을 설정합니다 */
+form {
+    display: block;
+}
+
+/* 폼 필드들을 그리드 레이아웃으로 배치하는 스타일입니다 */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+/* 각 폼 그룹의 스타일을 설정합니다 */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+/* 폼 그룹 내의 라벨 스타일을 설정합니다 */
+.form-group label {
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #555;
+}
+
+/* 검색 바 스타일 - 도서 관리 시스템과 동일하게 */
+.search-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+/* 입력 필드(input)의 기본 스타일을 설정합니다 */
+input, textarea {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: inherit;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* 특정 input 타입들의 높이 설정 */
+input[type="text"], input[type="email"], input[type="tel"], input[type="date"] {
+    height: 40px;
+}
+
+/* 버튼(button) 요소의 기본 스타일을 설정합니다 */
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: inherit;
+    transition: background-color 0.2s;
+}
+
+/* 버튼에 마우스를 올렸을 때(:hover)의 스타일을 설정합니다 */
+button:hover {
+    background-color: #0056b3;
+}
+
+/* 삭제 버튼 스타일 */
+.delete-btn {
+    background-color: #dc3545;
+    padding: 5px 10px;
+    font-size: 12px;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+/* 편집 버튼 스타일 */
+.edit-btn {
+    background-color: #28a745;
+    padding: 5px 10px;
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+.edit-btn:hover {
+    background-color: #218838;
+}
+
+/* 상세보기 버튼 스타일 */
+.detail-btn {
+    background-color: #17a2b8;
+    padding: 5px 10px;
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+.detail-btn:hover {
+    background-color: #138496;
+}
+
+/* 취소 버튼 스타일 */
+.cancel-btn {
+    background-color: #6c757d;
+    margin-left: 10px;
+}
+
+.cancel-btn:hover {
+    background-color: #5a6268;
+}
+
+/* 테이블(table) 요소의 스타일을 설정합니다 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* 테이블 헤더(th)와 데이터 셀(td)의 공통 스타일을 설정합니다 */
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* 테이블 헤더(th)의 추가 스타일을 설정합니다 */
+th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+/* 테이블 행(tr)에 마우스를 올렸을 때(:hover)의 스타일을 설정합니다 */
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* 테이블을 감싸는 컨테이너의 스타일을 설정합니다 */
+.table-container {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* 모달 스타일 - 도서 관리 시스템과 동일하게 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: black;
+}
+
+/* 버튼 그룹 컨테이너 스타일 */
+.button-group {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* 상세 정보 표시 스타일 - 도서 관리 시스템과 동일하게 */
+.detail-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.detail-section {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 6px;
+    border-left: 4px solid #28a745;
+}
+
+.detail-item {
+    margin-bottom: 10px;
+}
+
+.detail-label {
+    font-weight: bold;
+    color: #495057;
+    display: inline-block;
+    width: 100px;
+}
+
+.detail-value {
+    color: #212529;
+}
+
+/* 로딩 상태 표시 스타일 */
+.loading {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+}
+
+/* 로딩 스피너 */
+.loading::after {
+    content: "";
+    width: 20px;
+    height: 20px;
+    margin: 0 auto;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #007bff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 메시지 스타일 - 도서 관리 시스템과 동일하게 */
+.message {
+    padding: 10px;
+    border-radius: 4px;
+    margin: 10px 0;
+    animation: fadeIn 0.3s ease-in;
+}
+
+.error-message {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+}
+
+.success-message {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 폼 버튼 전체 너비 */
+form > button[type="submit"] {
+    width: 100%;
+    margin-top: 15px;
+    padding: 12px;
+    font-size: 16px;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .search-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    table {
+        font-size: 12px;
+    }
+    
+    th, td {
+        padding: 8px;
+        max-width: none;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 2% auto;
+    }
+    
+    .detail-info {
+        grid-template-columns: 1fr;
+    }
+    
+    .button-group {
+        justify-content: center;
+    }
+}

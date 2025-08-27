@@ -143,8 +143,7 @@
       .form-grid {
           display: grid;
           /* CSS Grid 레이아웃 사용 */
-          grid-template-columns: repeat(auto-fit,
-                  minmax(250px, 1fr));
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
           /* 반응형 그리드: 최소 250px, 자동 조정 */
           gap: 15px;
           /* 그리드 항목 간 15픽셀 간격 설정 (수정됨: 원래 15px) */
