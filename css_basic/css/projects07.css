@@ -1,0 +1,118 @@
+/* [1단계] 전체 초기화: 모든 브라우저의 기본 설정을 똑같이 맞춥니다. */
+* {
+    /* 브라우저가 기본으로 가진 바깥 여백(margin)과 안쪽 여백(padding)을 지웁니다. */
+    margin: 0;
+    padding: 0;
+    
+    /* 박스의 크기를 계산할 때 '너비(width) = 내용 + 패딩 + 테두리'가 되도록 설정합니다.
+       이걸 설정해야 나중에 패딩을 추가해도 박스 전체 크기가 변하지 않아 레이아웃 잡기가 편합니다. */
+    box-sizing: border-box; 
+}
+
+body {
+    background-color: #f8f9fa; /* 눈이 편안한 연한 회색 배경색 */
+    /* 웹 사이트의 기본 글꼴 설정 (사용자 컴퓨터에 있는 가장 깔끔한 글꼴 우선순위) */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;               /* 기본 글자색을 짙은 회색으로 설정 */
+    line-height: 1.6;          /* 줄 간격을 주어 글자가 읽기 편하게 만듭니다. */
+}
+
+/* [2단계] 상단 네비게이션: 페이지의 제목이 들어가는 상단 바 */
+.navbar {
+    background-color: #ffffff; /* 흰색 배경 */
+    height: 80px;              /* 높이를 80px로 고정 */
+    display: flex;             /* 내부 요소를 자유롭게 배치하기 위해 Flexbox 활성화 */
+    justify-content: center;   /* 가로 방향에서 중앙 정렬 */
+    align-items: center;       /* 세로 방향에서 중앙 정렬 */
+    border-bottom: 1px solid #ddd; /* 바닥면에 아주 연한 구분선 추가 */
+    /* 아래쪽으로 아주 살짝 그림자를 주어 입체감을 줍니다. (x, y, 흐림정도, 색상) */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.navbar h1 {
+    font-size: 1.5rem;         /* 글자 크기 조정 */
+    letter-spacing: 2px;       /* 글자 사이의 간격을 넓혀 고급스러운 느낌 부여 */
+    color: #222;
+}
+
+/* [3단계] 프로젝트 컨테이너: 카드들을 감싸는 큰 바구니 (Grid 활용) */
+.project-container {
+    max-width: 1100px;         /* 화면이 아무리 커져도 최대 가로 길이를 1100px로 제한 */
+    /* 위아래는 60px 띄우고, 좌우는 'auto'로 설정해 화면 가운데로 보냅니다. */
+    margin: 60px auto; 
+    padding: 0 20px;           /* 화면이 좁아졌을 때 카드가 벽에 붙지 않게 좌우 여백 추가 */
+    display: grid;             /* 바둑판 모양 배치를 위해 Grid 활성화 */
+    
+    /* 1fr(비율 단위)을 3번 반복해서 똑같은 너비의 열 3개를 만듭니다. */
+    grid-template-columns: repeat(3, 1fr); 
+    
+    /* 그리드 칸 사이(카드와 카드 사이)의 간격을 40px로 띄웁니다. */
+    gap: 40px;                 
+}
+
+/* [4단계] 프로젝트 카드: 각 프로젝트 정보를 담는 개별 박스 */
+.card {
+    background: white;         /* 카드 배경은 흰색 */
+    border-radius: 15px;       /* 카드 모서리를 둥글게 깎음 */
+    
+    /* 중요: 자식 요소(이미지 등)가 둥근 테두리 밖으로 튀어나가지 않게 숨깁니다. */
+    overflow: hidden;          
+    
+    /* 카드가 바닥에서 살짝 떠 있는 느낌의 그림자 */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+    
+    /* 마우스를 올렸을 때(Hover) 일어나는 모든 변화를 0.3초 동안 부드럽게 보여줍니다. */
+    transition: all 0.3s ease; 
+}
+
+/* [5단계] 카드 이미지 영역: 실제 이미지가 들어갈 자리 */
+.card-image {
+    height: 200px;             /* 이미지 영역 높이 고정 */
+    background-color: #444;    /* 이미지가 없을 때를 대비한 짙은 회색 배경 */
+    color: #fff;
+    display: flex;             /* 내부 글자를 중앙에 두기 위해 Flex 사용 */
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* [6단계] 카드 텍스트 내용: 제목과 설명이 들어가는 곳 */
+.card-content {
+    padding: 25px;             /* 카드 내부 사방에 여백을 주어 글자가 답답하지 않게 함 */
+}
+
+.card-content h3 {
+    margin-bottom: 12px;       /* 제목 아래쪽 본문과의 간격 */
+    font-size: 1.25rem;
+}
+
+.card-content p {
+    color: #777;               /* 본문은 제목보다 조금 더 연한 회색으로 */
+    font-size: 0.95rem;
+    margin-bottom: 20px;       /* 아래 태그들과의 간격 */
+}
+
+/* [7단계] 마우스 오버(Hover) 효과: 마우스를 카드 위에 올렸을 때의 변화 */
+.card:hover {
+    /* translateY(-15px): Y축(세로) 방향으로 -15px만큼 이동(즉, 위로 공중 부양) */
+    transform: translateY(-15px); 
+    /* 떠오른 느낌을 극대화하기 위해 그림자를 더 크고 진하게 바꿉니다. */
+    box-shadow: 0 12px 25px rgba(0,0,0,0.2); 
+}
+
+/* [7단계] 기술 스택 태그: 사용한 기술들을 보여주는 작은 칩 */
+.tags {
+    display: flex;             /* 태그들을 가로로 나열 */
+    gap: 8px;                  /* 태그들 사이의 간격 */
+    flex-wrap: wrap;           /* 화면이 좁아 태그가 넘치면 자동으로 다음 줄로 넘김 */
+}
+
+.tags span {
+    background: #f0f0f0;       /* 태그 배경은 아주 연한 회색 */
+    padding: 4px 12px;         /* 태그 안쪽 여백 */
+    border-radius: 50px;       /* 수치를 크게 주어 완전한 알약 모양으로 만듦 */
+    font-size: 0.8rem;
+    color: #555;
+    font-weight: 500;
+}

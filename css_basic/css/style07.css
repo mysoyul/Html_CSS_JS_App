@@ -1,0 +1,123 @@
+/* style.css */
+
+/* style.css */
+
+/* [1단계] 공통 설정 및 초기화 */
+* {
+    /* 모든 요소의 기본 여백(margin, padding)을 0으로 초기화합니다. */
+    margin: 0;
+    padding: 0;
+    
+    /* 요소의 크기를 계산할 때 테두리(border)와 안쪽 여백(padding)을 너비에 포함시킵니다. 
+       이걸 안 하면 패딩을 줄 때마다 박스가 커져서 레이아웃이 깨지기 쉬워요! */
+    box-sizing: border-box; 
+}
+
+body {
+    /* 웹사이트 전체의 글꼴을 설정합니다. (serif가 없는 깔끔한 고딕체 계열) */
+    font-family: sans-serif;
+    /* 배경색을 아주 연한 회색으로 깔아줍니다. */
+    background-color: #f4f4f4;
+}
+
+/* [2단계] 헤더(상단 바) 레이아웃 */
+.header {
+    /* Flexbox를 활성화하여 자식 요소(로고, 메뉴)를 가로로 배치합니다. */
+    display: flex;
+    /* 자식 요소들을 양쪽 끝으로 밀어냅니다. (이름은 왼쪽, 메뉴는 오른쪽) */
+    justify-content: space-between; 
+    /* 자식 요소들을 세로 방향에서 정중앙에 위치시킵니다. */
+    align-items: center; 
+    /* 안쪽 여백: 위아래 20px, 좌우 50px을 줍니다. */
+    padding: 20px 50px;
+    /* 배경은 어두운 회색(#333), 글자는 흰색(white)으로 설정합니다. */
+    background-color: #333;
+    color: white;
+}
+
+/* [3단계] 히어로 섹션 (중앙 큰 문구 영역) */
+.hero {
+    /* 화면에서 이 영역이 차지할 높이를 400px로 고정합니다. */
+    height: 400px;
+    /* 내부 문구들을 정중앙에 배치하기 위해 Flexbox를 사용합니다. */
+    display: flex;
+    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: center;     /* 세로 중앙 정렬 */
+    /* 배경은 흰색으로, 텍스트는 가운데 정렬합니다. */
+    background-color: #fff;
+    text-align: center;
+}
+
+/* [4단계] 프로필 카드 (박스 모델 활용) */
+.container {
+    /* 전체 콘텐츠가 벽에 붙지 않도록 사방에 50px의 여백을 줍니다. */
+    padding: 50px;
+}
+
+.profile-card {
+    background: white;
+    /* 연한 회색의 실선 테두리를 1px 두께로 만듭니다. */
+    border: 1px solid #ddd;
+    /* 테두리의 모서리를 10px만큼 둥글게 깎습니다. */
+    border-radius: 10px;
+    /* 카드 내부 내용물이 테두리에 붙지 않게 30px 여백을 줍니다. */
+    padding: 30px;
+    /* 사진과 정보를 가로로 배치하기 위해 Flexbox 사용 */
+    display: flex; 
+    /* 사진과 글 사이의 간격을 20px 띄웁니다. */
+    gap: 20px;
+}
+
+/* [5단계] 기술 스택 (Grid 활용) */
+.skills {
+    padding: 50px;
+}
+
+.grid-wrapper {
+    /* 바둑판 모양 레이아웃인 Grid를 활성화합니다. */
+    display: grid;
+    /* 1fr(남은 공간을 차지하는 비율)을 4번 반복하여 4개의 열을 만듭니다. */
+    grid-template-columns: repeat(4, 1fr); 
+    /* 그리드 칸 사이의 간격을 가로세로 15px씩 줍니다. */
+    gap: 15px;
+    /* 상단 영역(About Me)과 조금 떨어지도록 위쪽에 20px 여백을 줍니다. */
+    margin-top: 20px;
+}
+
+.skill-item {
+    background: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+/* [6단계] 푸터 (하단 바) */
+.footer {
+    /* 텍스트를 중앙으로 보냅니다. */
+    text-align: center;
+    /* 위아래로 여유 있게 30px 안쪽 여백을 줍니다. */
+    padding: 30px;
+    /* 아주 연한 회색 배경 */
+    background: #eee;
+    /* 본문 콘텐츠와 겹치지 않게 위쪽 바깥 여백을 50px 줍니다. */
+    margin-top: 50px;
+}
+
+/* [7단계] projects.html 을 호출하는 링크의 스타일 추가 */
+/* 1. nav 내부의 링크 기본 스타일 */
+nav a {
+    color: white;           /* 글자색을 흰색으로 고정 */
+    text-decoration: none;  /* 밑줄 제거 */
+    transition: color 0.3s; /* 색상이 변할 때 부드럽게 애니메이션 적용 */
+}
+
+/* 2. 메뉴들 간의 간격 조정 */
+nav span {
+    margin-left: 25px;      /* 메뉴 사이를 적당히 띄움 */
+}
+
+/* 3. 마우스를 올렸을 때 반응 */
+nav a:hover {
+    color: #00adb5;         /* 포인트 컬러(민트/하늘색 계열)로 변경 */
+}
