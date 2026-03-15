@@ -1,0 +1,159 @@
+/* [프로젝트 갤러리 최종 단계] */
+
+/* 변수 설정 */
+:root {
+    --primary-color: #00adb5;
+    --dark-bg: #222831;
+    --card-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    --transition-speed: 0.3s;
+}
+
+/* 초기화 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f0f2f5;
+    font-family: 'Pretendard', 'Segoe UI', sans-serif;
+    color: #333;
+}
+
+/* 헤더 디자인 */
+.navbar {
+    background-color: var(--dark-bg);
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.navbar h1 {
+    font-size: 2.5rem;
+    letter-spacing: 4px;
+    margin-bottom: 10px;
+}
+
+.navbar p {
+    color: #888;
+    font-weight: 300;
+}
+
+/* 프로젝트 컨테이너: 그리드 레이아웃 */
+.project-container {
+    max-width: 1200px;
+    margin: -40px auto 80px; /* 헤더 위로 살짝 걸치게 음수 마진 사용 */
+    padding: 0 20px;
+    display: grid;
+    /* [기본] 데스크톱에서는 3열 */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+/* 개별 카드 스타일 */
+.card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden; /* 이미지 둥근 모서리 적용을 위해 필수 */
+    box-shadow: var(--card-shadow);
+    transition: transform var(--transition-speed) ease;
+}
+
+/* [개선 1] 카드 이미지 및 오버레이 효과 */
+.card-image-box {
+    position: relative; /* 오버레이의 기준 */
+    height: 200px;
+    background-color: #eee;
+}
+
+.card-image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 이미지가 찌그러지지 않게 꽉 채움 */
+    transition: transform var(--transition-speed);
+}
+
+.card-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 173, 181, 0.8); /* 포인트 컬러 투명하게 적용 */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    opacity: 0; /* 처음에는 안 보임 */
+    transition: opacity var(--transition-speed);
+}
+
+/* 카드에 마우스를 올렸을 때의 변화 */
+.card:hover {
+    transform: translateY(-10px); /* 위로 살짝 올라옴 */
+}
+
+.card:hover .card-overlay {
+    opacity: 1; /* 오버레이가 나타남 */
+}
+
+.card:hover .card-image-box img {
+    transform: scale(1.1); /* 이미지가 살짝 커짐 */
+}
+
+/* 카드 콘텐츠 */
+.card-content {
+    padding: 25px;
+}
+
+.card-title {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    color: var(--dark-bg);
+}
+
+.card-content p {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* 태그 스타일링 */
+.tags {
+    display: flex;
+    gap: 8px;
+}
+
+.tag {
+    background: #f0f0f0;
+    color: #555;
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+/* 푸터 */
+.footer {
+    text-align: center;
+    padding: 60px 0;
+    color: #888;
+    background-color: white;
+}
+
+/* [개선 2] 반응형 미디어 쿼리 */
+@media (max-width: 1024px) {
+    /* 화면이 약간 좁아지면(태블릿) 2열로 변경 */
+    .project-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    /* 화면이 아주 좁아지면(모바일) 1열로 변경 */
+    .project-container {
+        grid-template-columns: 1fr;
+        margin-top: 20px; /* 모바일에서는 음수 마진 제거 */
+    }
+    
+    .navbar h1 { font-size: 1.8rem; }
+}

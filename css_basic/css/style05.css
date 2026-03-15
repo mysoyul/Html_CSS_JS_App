@@ -74,6 +74,13 @@ body {
 }
 
 .grid-wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.grid-wrapper {
     /* 바둑판 모양 레이아웃인 Grid를 활성화합니다. */
     display: grid;
     /* 1fr(남은 공간을 차지하는 비율)을 4번 반복하여 4개의 열을 만듭니다. */

@@ -101,7 +101,7 @@ body {
     box-shadow: 0 12px 25px rgba(0,0,0,0.2); 
 }
 
-/* [8단계] 기술 스택 태그: 사용한 기술들을 보여주는 작은 칩 */
+/* [7단계] 기술 스택 태그: 사용한 기술들을 보여주는 작은 칩 */
 .tags {
     display: flex;             /* 태그들을 가로로 나열 */
     gap: 8px;                  /* 태그들 사이의 간격 */
@@ -117,7 +117,7 @@ body {
     font-weight: 500;
 }
 
-/* [9단계] 푸터 디자인 */
+/* [8단계] 푸터 디자인 */
 .footer {
     text-align: center;
     padding: 40px 0;
