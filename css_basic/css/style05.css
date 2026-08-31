@@ -55,6 +55,8 @@ body {
 }
 
 .profile-card {
+    /* 사진과 정보를 가로로 배치하기 위해 Flexbox 사용 */
+    display: flex; 
     background: white;
     /* 연한 회색의 실선 테두리를 1px 두께로 만듭니다. */
     border: 1px solid #ddd;
@@ -62,22 +64,15 @@ body {
     border-radius: 10px;
     /* 카드 내부 내용물이 테두리에 붙지 않게 30px 여백을 줍니다. */
     padding: 30px;
-    /* 사진과 정보를 가로로 배치하기 위해 Flexbox 사용 */
-    display: flex; 
     /* 사진과 글 사이의 간격을 20px 띄웁니다. */
     gap: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* [5단계] 기술 스택 (Grid 활용) */
 .skills {
     padding: 50px;
-}
-
-.grid-wrapper {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); 
-    gap: 15px;
-    margin-top: 20px;
+    text-align: center;
 }
 
 .grid-wrapper {
