@@ -36,7 +36,7 @@ body {
 /* [3단계] 히어로 섹션 (중앙 큰 문구 영역) */
 .hero {
     /* 화면에서 이 영역이 차지할 높이를 400px로 고정합니다. */
-    height: 400px;
+    height: 60vh;
     /* 내부 문구들을 정중앙에 배치하기 위해 Flexbox를 사용합니다. */
     display: flex;
     justify-content: center; /* 가로 중앙 정렬 */
