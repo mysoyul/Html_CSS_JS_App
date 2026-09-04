@@ -1,0 +1,48 @@
+/* ===== 2장. 선택자와 우선순위 ===== */
+
+/* --- 기본 선택자 --- */
+.sel-demo p {          /* 타입 선택자 (가장 약함) */
+    color: #555;
+}
+.sel-demo .hi {        /* 클래스 선택자 */
+    color: #2e5496;
+    font-weight: bold;
+}
+.sel-demo #only {      /* id 선택자 (가장 셈) */
+    color: #c0504d;
+}
+
+/* --- 관계 선택자 : 공백의 차이 --- */
+.box-a, .box-b {
+    margin-bottom: 12px;
+    padding: 14px;
+    border: 1px solid #ccd;
+    border-radius: 6px;
+    background-color: #ffffff;
+    transition: background-color 0.25s;
+}
+.box-a .inner, .box-b .inner {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 4px;
+    background-color: #eef1f5;
+    transition: background-color 0.25s;
+}
+
+/* .box-a 자신에게 마우스가 올라올 때 */
+.box-a:hover {
+    background-color: #e5f0f8;
+}
+
+/* .box-b 안의 요소에 마우스가 올라올 때 (공백에 주의) */
+.box-b :hover {
+    background-color: #fceaea;
+}
+
+/* --- 우선순위 실험 --- */
+.demo p.prio {
+    color: #2e5496;             /* class */
+}
+.demo #prio-id {
+    color: #c0504d;             /* id — 이쪽이 이깁니다 */
+}

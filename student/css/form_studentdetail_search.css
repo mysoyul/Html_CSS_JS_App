@@ -195,6 +195,7 @@ tr:hover {
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     overflow: hidden;
+    padding: 20px;
 }
 
 /* 모달 스타일 - 도서 관리 시스템과 동일하게 */
