@@ -36,7 +36,7 @@ import {
 } from "./ui/studentTable.js";
 import { showError, showSuccess, clearMessages, setLoading } from "./ui/message.js";
 
-/** 수정 중인 학생 ID. 값이 있으면 수정 모드, null 이면 등록 모드. */
+/** 수정 중인 학생 ID. 값이 있으면 수정 모드, null 이면 등록 모드.*/
 let editingStudentId = null;
 
 
