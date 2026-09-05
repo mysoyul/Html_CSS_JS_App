@@ -35,8 +35,8 @@ async function updateStudent(studentId, studentData) {
     try {
         await apiUpdateStudent(studentId, studentData);
 
+        resetForm();   // clearMessages() 가 들어 있으므로 메시지보다 먼저
         showSuccess("학생 정보가 성공적으로 수정되었습니다.");
-        resetForm();
         loadStudents();
     } catch (error) {
         console.error("Error:", error);
