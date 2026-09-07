@@ -78,6 +78,36 @@
         </table>
       </section>
 
+      <section class="block">
+        <h2>JS 만 담은 파일</h2>
+        <p>설명과 데모 상자를 걷어내고 <b>그 장의 js 파일이 동작하는 데 필요한 것만</b> 남긴 파일입니다.
+           교재용 <code>base.css</code> 를 붙이지 않았으므로 브라우저 기본 모양입니다.
+           JS 는 위의 교재 페이지와 <b>같은 <code>js/</code> 파일을 함께 씁니다.</b>
+           F12 &rarr; Console 을 함께 열어 두세요.</p>
+        <ul class="toc">
+          <li><a href="ch03_variable_only.html"><span class="num">3장</span>ch03_variable_only.html
+              <span class="desc">— var/let 유효 범위·재선언, const, 반복문 + setTimeout</span></a></li>
+          <li><a href="ch04_template_arrow_only.html"><span class="num">4장</span>ch04_template_arrow_only.html
+              <span class="desc">— 화살표 함수와 function 의 this 차이</span></a></li>
+          <li><a href="ch05_destructuring_only.html"><span class="num">5장</span>ch05_destructuring_only.html
+              <span class="desc">— 메서드를 떼어내면 this 가 사라진다 · bind</span></a></li>
+          <li><a href="ch06_spread_only.html"><span class="num">6장</span>ch06_spread_only.html
+              <span class="desc">— 얕은 복사 함정, rest, 기본 매개변수, ?. 와 ??</span></a></li>
+          <li><a href="ch07_async_only.html"><span class="num">7장</span>ch07_async_only.html
+              <span class="desc">— Promise 상태, 실행 순서, then · await, Promise.all</span></a></li>
+          <li><a href="ch08_module_only.html"><span class="num">8장</span>ch08_module_only.html
+              <span class="desc">— export / import — type="module" 필요</span></a></li>
+          <li><a href="ch09_vite_only.html"><span class="num">9장</span>ch09_vite_only.html
+              <span class="desc">— import.meta — type="module" 필요, 버튼 없음</span></a></li>
+        </ul>
+        <div class="warn">
+          <b>자주 나는 오류</b>
+          7장은 <code>data/*.json</code> 을 fetch 로 읽고, 8장은 모듈을 import 합니다.
+          파일을 더블클릭해서 <code>file://</code> 로 열면 둘 다 CORS 로 막힙니다.
+          반드시 <b>Live Server</b> 로 여세요.
+        </div>
+      </section>
+
     </main>
 
     <footer class="page-foot">
