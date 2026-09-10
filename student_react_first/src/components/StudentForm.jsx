@@ -22,7 +22,7 @@ const FIELDS = [
     { name: "studentNumber", label: "학번", type: "text", required: true },
     { name: "address", label: "주소", type: "text", required: true },
     { name: "phoneNumber", label: "전화번호", type: "tel", required: true },
-    { name: "email", label: "이메일", type: "email", required: false },
+    { name: "email", label: "이메일", type: "email", required: true },
     { name: "dateOfBirth", label: "생년월일", type: "date", required: false },
 ];
 
