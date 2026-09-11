@@ -1,16 +1,19 @@
-/* ===========================================================
+/* ---------------------------------------------------------
    main.js — 앱을 조립하는 곳
-   -----------------------------------------------------------
-   지금까지 만든 모듈들을 가져와 이벤트에 연결합니다.
-   화면(ui/)과 서버(api/)와 검사(lib/)를 이어 주는 것이
-   이 파일의 유일한 역할입니다.
+   3부 form.js 의 이벤트 연결과 흐름 제어만 남았습니다.
 
-   form11.js 400여 줄이 여기서는 100줄 남짓으로 줄었습니다.
-   코드가 사라진 것이 아니라 역할별로 나뉘어 간 것입니다.
-   =========================================================== */
+   여기서 하는 일은 세 가지뿐입니다.
+     (1) 필요한 함수들을 다른 파일에서 가져오고
+     (2) 어떤 일이 일어났을 때 무엇을 부를지 이어 주고
+     (3) 수정 중인지 아닌지 같은 상태를 기억한다
 
+   실제 일은 api/, lib/, ui/ 가 나눠서 합니다.
+   --------------------------------------------------------- */
+
+// CSS 도 import 한다. Vite 가 이 줄을 보고 스타일을 끼워 넣는다.
 import "./style.css";
 
+// 서버와 대화하는 함수들
 import {
     fetchStudents,
     fetchStudent,
@@ -19,8 +22,10 @@ import {
     deleteStudent,
 } from "./api/studentApi.js";
 
+// 입력값 검사
 import { validateStudent } from "./lib/validation.js";
 
+// 폼 다루기
 import {
     studentForm,
     cancelButton,
@@ -31,45 +36,60 @@ import {
     scrollToForm,
 } from "./ui/studentForm.js";
 
+// 표 그리기
 import {
-    renderStudentTable, renderTableError, studentTableBody,
+    renderStudentTable,
+    renderTableError,
+    studentTableBody,
 } from "./ui/studentTable.js";
-import { showError, showSuccess, clearMessages, setLoading } from "./ui/message.js";
 
-/** 수정 중인 학생 ID. 값이 있으면 수정 모드, null 이면 등록 모드.*/
+// 메시지 표시
+import {
+    showError,
+    showSuccess,
+    clearMessages,
+    setLoading,
+} from "./ui/message.js";
+
+// 이 파일이 기억하는 유일한 상태다.
+// 값이 있으면 수정 모드, null 이면 등록 모드다.
 let editingStudentId = null;
 
 
-/* ---------------------------------------------------------
-   목록 불러오기
-   --------------------------------------------------------- */
+/* ── 목록 불러오기 ──────────────────────────────────────── */
+
 async function loadStudents() {
     setLoading(true);
 
+    // try 안에서 오류가 나면 곧바로 catch 로 넘어간다.
+    // finally 는 성공하든 실패하든 마지막에 반드시 실행된다.
     try {
+        // await 은 서버 응답이 올 때까지 기다린다.
+        // 3부의 fetch().then().then() 사슬이 두 줄이 되었다.
         const students = await fetchStudents();
         renderStudentTable(students);
     } catch (error) {
         console.error("Error:", error);
-        showError(error.message);
+        showError(error.message);    // studentApi 가 던진 메시지
         renderTableError();
     } finally {
-        // 성공하든 실패하든 로딩 표시는 반드시 끈다.
+        // 여기에 두면 성공 경로와 실패 경로에 두 번 적지 않아도 된다.
         setLoading(false);
     }
 }
 
 
-/* ---------------------------------------------------------
-   등록 / 수정 — 폼 제출
-   --------------------------------------------------------- */
+/* ── 등록 / 수정 — 폼 제출 ─────────────────────────────── */
+
+// 핸들러 안에서 await 을 쓰려면 함수에 async 를 붙여야 한다.
 studentForm.addEventListener("submit", async (event) => {
-    event.preventDefault();          // 페이지 새로고침 막기
+    event.preventDefault();          // 폼 제출로 페이지가 새로고침되는 것을 막는다
     clearMessages();
 
     const studentData = collectStudentData();
 
-    // 검사에 걸리면 메시지만 보여 주고 끝낸다(early return).
+    // validateStudent 는 문제가 있으면 메시지를, 없으면 null 을 돌려준다.
+    // 문제가 있으면 여기서 끝낸다(early return).
     const errorMessage = validateStudent(studentData);
     if (errorMessage) {
         showError(errorMessage);
@@ -77,6 +97,7 @@ studentForm.addEventListener("submit", async (event) => {
     }
 
     try {
+        // editingStudentId 에 값이 있으면 수정, 없으면 등록이다.
         if (editingStudentId) {
             await updateStudent(editingStudentId, studentData);
             showSuccess("학생 정보가 성공적으로 수정되었습니다.");
@@ -95,16 +116,27 @@ studentForm.addEventListener("submit", async (event) => {
 });
 
 
-/* ---------------------------------------------------------
-   수정 / 삭제 — 표에서 일어난 클릭을 한곳에서 받는다 (이벤트 위임)
-   --------------------------------------------------------- */
+/* ── 수정 / 삭제 — 표의 클릭을 tbody 한 곳에서 받는다 ──── */
+
+/* 버튼마다 이벤트를 걸지 않는 이유는, 표를 다시 그릴 때마다
+   버튼이 새로 만들어져 매번 다시 걸어야 하기 때문이다.
+   사라지지 않는 부모인 tbody 에 한 번만 걸어 두면
+   나중에 생기는 행의 버튼도 그대로 동작한다(이벤트 위임). */
 studentTableBody.addEventListener("click", async (event) => {
-    // 클릭된 지점에서 가장 가까운 data-action 버튼을 찾는다.
+    // tbody 안에서 일어난 클릭이 전부 여기로 들어온다.
+    // 이름 칸을 눌렀는지 버튼을 눌렀는지 먼저 가려내야 한다.
+    //
+    //   event.target  이벤트를 건 tbody 가 아니라 실제로 눌린 가장 안쪽 요소
+    //   closest(...)  자기 자신부터 부모 쪽으로 올라가며 조건에 맞는 첫 요소를 찾는다
+    //                 끝까지 없으면 null 을 돌려준다
     const button = event.target.closest("button[data-action]");
     if (!button) return;             // 버튼이 아닌 곳을 눌렀다
 
+    // data-action="edit" 은 button.dataset.action 으로 읽는다.
     const { action, id } = button.dataset;
 
+    // dataset 값은 언제나 문자열이다. data-id="3" 이면 "3" 이 온다.
+    // 그래서 Number() 로 숫자로 바꿔서 넘긴다.
     if (action === "edit") {
         await startEdit(Number(id));
     } else if (action === "delete") {
@@ -112,10 +144,7 @@ studentTableBody.addEventListener("click", async (event) => {
     }
 });
 
-/**
- * 수정할 학생 정보를 불러와 폼에 채우고 수정 모드로 바꾼다.
- * @param {number} studentId
- */
+// 수정할 학생 정보를 불러와 폼에 채우고 수정 모드로 바꾼다.
 async function startEdit(studentId) {
     clearMessages();
 
@@ -123,7 +152,7 @@ async function startEdit(studentId) {
         const student = await fetchStudent(studentId);
 
         fillForm(student);
-        editingStudentId = studentId;
+        editingStudentId = studentId;   // 이제 제출하면 등록이 아니라 수정이 된다
         setEditMode(true);
         scrollToForm();
     } catch (error) {
@@ -132,10 +161,7 @@ async function startEdit(studentId) {
     }
 }
 
-/**
- * 확인을 받은 뒤 학생을 삭제한다.
- * @param {number} studentId
- */
+// 확인을 받은 뒤 학생을 삭제한다.
 async function removeStudent(studentId) {
     if (!confirm("정말로 이 학생을 삭제하시겠습니까?")) {
         return;
@@ -146,6 +172,7 @@ async function removeStudent(studentId) {
         showSuccess("학생이 성공적으로 삭제되었습니다.");
 
         // 수정 중이던 학생을 삭제했다면 폼도 등록 모드로 되돌린다.
+        // 이걸 빠뜨리면 없는 학생을 수정하려다 404 가 난다.
         if (editingStudentId === studentId) {
             editingStudentId = null;
             resetForm();
@@ -159,9 +186,8 @@ async function removeStudent(studentId) {
 }
 
 
-/* ---------------------------------------------------------
-   취소 버튼 — 수정 모드에서 빠져나온다
-   --------------------------------------------------------- */
+/* ── 취소 버튼 — 수정 모드에서 빠져나온다 ──────────────── */
+
 cancelButton.addEventListener("click", () => {
     editingStudentId = null;
     resetForm();
@@ -169,10 +195,8 @@ cancelButton.addEventListener("click", () => {
 });
 
 
-/* ---------------------------------------------------------
-   시작
-   -----------------------------------------------------------
-   type="module" 스크립트는 HTML 을 다 읽은 뒤 실행되므로
-   DOMContentLoaded 를 기다릴 필요가 없습니다.
-   --------------------------------------------------------- */
+/* ── 시작 ──────────────────────────────────────────────── */
+
+// 3부에서는 DOMContentLoaded 안에서 불러야 했다.
+// type="module" 은 HTML 을 다 읽은 뒤 실행되므로 여기서 바로 부른다.
 loadStudents();

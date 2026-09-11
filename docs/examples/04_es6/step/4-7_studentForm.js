@@ -5,22 +5,28 @@
    교재      : 05_ECMAScript_실습_단계별.docx
    =========================================================== */
 
+// export 를 붙이면 다른 파일에서 import 로 가져다 쓸 수 있다.
+// main.js 가 submit 이벤트를 걸어야 하므로 밖으로 내보낸다.
 export const studentForm = document.getElementById("studentForm");
 
+// 폼에 입력된 값을 서버가 받는 구조로 모은다.
 export function collectStudentData() {
-    // FormData 를 한 번에 객체로 바꾼 뒤, 필요한 값만 구조 분해로 꺼낸다.
-    const { name, studentNumber, address, phoneNumber, email, dateOfBirth } =
-        Object.fromEntries(new FormData(studentForm).entries());
+    // FormData 는 폼 안의 입력칸을 name 속성으로 꺼내 쓸 수 있게 모아 준다.
+    // id 가 아니라 name 이 열쇠다.
+    const formData = new FormData(studentForm);
 
+    // 서버는 학생 기본 정보와 상세 정보를 나눠서 받는다.
     return {
-        name: name.trim(),
-        studentNumber: studentNumber.trim(),
+        name: formData.get("name").trim(),
+        studentNumber: formData.get("studentNumber").trim(),
         detailRequest: {
-            address: address.trim(),
-            phoneNumber: phoneNumber.trim(),
-            // 빈 문자열("")도 걸러야 하므로 여기서는 ?? 가 아니라 || 를 쓴다.
-            email: email.trim() || null,
-            dateOfBirth: dateOfBirth || null,
+            address: formData.get("address").trim(),
+            phoneNumber: formData.get("phoneNumber").trim(),
+            // 여기서만 ?? 가 아니라 || 를 쓴다.
+            // 아무것도 입력하지 않으면 빈 문자열("")이 오는데,
+            // ?? 는 빈 문자열을 통과시켜 서버로 "" 이 나가 버린다.
+            email: formData.get("email").trim() || null,
+            dateOfBirth: formData.get("dateOfBirth") || null,
         },
     };
 }

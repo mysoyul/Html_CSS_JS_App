@@ -1,22 +1,20 @@
-/* ===========================================================
-   설정 — 하드코딩된 주소를 한곳으로 모은다
-   -----------------------------------------------------------
-   form11.js 에서는 파일 맨 위에 이렇게 적혀 있었습니다.
+/* ---------------------------------------------------------
+   설정 — 서버 주소를 한곳으로 모은다
+   3부 form.js 맨 위의 const API_BASE_URL 이 여기로 왔습니다.
+   --------------------------------------------------------- */
 
-       const API_BASE_URL = "http://localhost:8080";
-
-   주소가 코드에 박혀 있으면 개발용과 운영용을 바꿀 때마다
-   소스를 고쳐야 합니다. Vite 는 .env 파일에 적은 값을
-   import.meta.env 로 넘겨주므로 코드를 고치지 않아도 됩니다.
-   =========================================================== */
-
-/** 서버 주소. .env 파일이 없을 때를 대비해 ?. 와 ?? 로 기본값을 둔다. */
+// import.meta.env 는 Vite 가 .env 파일의 값을 넣어 주는 자리다.
+//   ?.  왼쪽이 없으면(undefined) 멈추고 undefined 를 돌려준다.
+//       Vite 없이 열었을 때 "Cannot read properties of undefined" 를 막는다.
+//   ??  왼쪽이 null 이나 undefined 일 때만 오른쪽 값을 쓴다.
+//       || 와 달리 빈 문자열("")과 0 은 그대로 살린다.
 export const API_BASE_URL = import.meta.env?.VITE_API_BASE_URL ?? "http://localhost:8080";
 
-/** 학생 API 의 기본 경로 */
+// 백틱(`)으로 감싸면 ${ } 안에 값을 끼워 넣을 수 있다(템플릿 리터럴).
+// 3부의 `${API_BASE_URL}/api/students` 를 매번 쓰던 것을 한 번만 만들어 둔다.
 export const STUDENTS_URL = `${API_BASE_URL}/api/students`;
 
-/** JSON 을 보낼 때 항상 붙여야 하는 헤더 */
+// POST 와 PUT 에서 똑같이 쓰던 헤더. 3부에서는 함수마다 적어 두었다.
 export const JSON_HEADERS = {
     "Content-Type": "application/json",
 };

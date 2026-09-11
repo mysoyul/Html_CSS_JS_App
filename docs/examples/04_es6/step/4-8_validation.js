@@ -5,44 +5,42 @@
    교재      : 05_ECMAScript_실습_단계별.docx
    =========================================================== */
 
-/** 학번: 영문 2자 + 숫자 3자. i 플래그라 대소문자를 가리지 않는다 */
+// 학번: 영문 2자 + 숫자 3자 (예: EE002)
+//   ^     문자열의 시작        [A-Z]{2}  영문 대문자 2개
+//   \d{3} 숫자 3개             $         문자열의 끝
+//   /i    대소문자를 가리지 않는다 (ee002 도 통과)
 const STUDENT_NUMBER_PATTERN = /^[A-Z]{2}\d{3}$/i;
 
-/** 전화번호: 숫자, 하이픈, 공백만 */
+// 전화번호: 숫자, 하이픈, 공백만 한 개 이상(+)
 const PHONE_PATTERN = /^[0-9-\s]+$/;
 
-/** 이메일: @ 앞뒤와 점 뒤에 공백 아닌 글자가 있어야 한다 */
+// 이메일: @ 앞뒤와 점 뒤에 "공백도 @도 아닌 글자"가 있어야 한다
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-/**
- * 이메일 형식이 올바른지 검사한다.
- * @param {string} email
- * @returns {boolean}
- */
+// test() 는 정규식과 맞으면 true, 아니면 false 를 돌려준다.
 export const isValidEmail = (email) => EMAIL_PATTERN.test(email);
 
-/**
- * 학번 형식이 올바른지 검사한다.
- * 공백이 섞여 들어올 수 있으므로 양끝 공백을 지운 뒤 검사한다.
- * @param {string} studentNumber
- * @returns {boolean}
- */
+// 앞뒤에 공백이 섞여 들어올 수 있으므로 trim() 으로 지운 뒤 검사한다.
 export const isValidStudentNumber = (studentNumber) =>
     STUDENT_NUMBER_PATTERN.test(studentNumber.trim());
 
-/**
- * 학생 데이터를 검사해 첫 번째 오류 메시지를 돌려준다.
- * @param {object} student 등록·수정 요청 데이터
- * @returns {string|null} 문제가 없으면 null, 있으면 메시지
- */
+/* 문제가 없으면 null, 있으면 첫 번째 오류 메시지를 돌려준다.
+   3부에서는 여기서 alert 을 띄우고 true / false 를 돌려주었다. */
 export function validateStudent(student) {
-    // 구조 분해로 필요한 값만 꺼낸다. detailRequest 가 없을 때를 대비해 기본값 {} 를 둔다.
+    // 구조 분해 — 객체에서 필요한 값만 이름 그대로 꺼낸다.
+    // const name = student.name; 을 세 번 쓰는 것과 같다.
+    //
+    // detailRequest = {} 는 기본값이다. detailRequest 가 없는 객체가
+    // 들어와도 빈 객체로 대신해 "Cannot destructure property" 를 막는다.
     const { name, studentNumber, detailRequest = {} } = student;
     const { phoneNumber, email } = detailRequest;
 
+    // 문제를 찾으면 그 자리에서 바로 돌려주고 끝낸다(early return).
+    // 아래로 갈수록 조건이 중첩되지 않아 읽기 쉽다.
     if (!name) return "이름을 입력해주세요.";
 
-    // 앞의 조건이 먼저 걸러 주므로 isValidStudentNumber 안의 trim() 이 안전하다.
+    // || 는 왼쪽이 거짓이면 오른쪽을 검사한다.
+    // !studentNumber 가 먼저 걸러 주므로 안쪽 trim() 이 안전하다.
     if (!studentNumber || !isValidStudentNumber(studentNumber)) {
         return "학번을 입력하지 않거나 올바른 형식이 아닙니다.";
     }
@@ -51,11 +49,12 @@ export function validateStudent(student) {
         return "전화번호를 입력하지 않거나 올바른 전화번호 형식이 아닙니다.";
     }
 
-    // 이메일은 선택 항목이 아니라 필수입니다.
-    // collectStudentData 가 빈 문자열을 null 로 바꾸므로 여기서 걸립니다.
+    // 이메일은 선택이 아니라 필수다.
+    // collectStudentData 가 빈 칸을 null 로 바꿔 주므로 !email 에 걸린다.
     if (!email || !isValidEmail(email)) {
         return "이메일을 입력하지 않거나 올바른 이메일 형식이 아닙니다.";
     }
 
+    // 여기까지 왔으면 문제가 없다는 뜻이다.
     return null;
 }
