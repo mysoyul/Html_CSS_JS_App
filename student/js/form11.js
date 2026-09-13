@@ -339,3 +339,7 @@ function clearMessages() {
     formError.textContent = '';
     formError.style.display = 'none';
 }
+
+cancelButton.addEventListener("click", resetForm);
+window.editStudent = editStudent;
+window.deleteStudent = deleteStudent;
