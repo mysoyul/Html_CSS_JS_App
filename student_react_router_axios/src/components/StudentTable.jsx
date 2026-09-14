@@ -20,28 +20,28 @@ const COLUMN_COUNT = 7;
      error     목록을 못 불러왔을 때의 메시지 (없으면 null)
      onDelete  삭제 버튼을 눌렀을 때 부를 함수 */
 function StudentTable({ students, loading, error, onDelete }) {
-    // tbody 안에 무엇을 그릴지 세 경우로 나눠서 정한다.
-    function renderRows() {
+    /* tbody 안에 무엇을 그릴지 세 경우로 나눠서 정한다.
+       JSX 안에 && 와 ? : 를 이어 쓰면 읽기 어려우므로,
+       먼저 rows 에 담아 두고 아래 표 안에 끼워 넣는다. */
+    let rows;
+
+    if (error) {
         // (1) 목록을 못 불러왔다
-        if (error) {
-            return (
-                <tr>
-                    <td colSpan={COLUMN_COUNT} className="error-row">{error}</td>
-                </tr>
-            );
-        }
-
+        rows = (
+            <tr>
+                <td colSpan={COLUMN_COUNT} className="error-row">{error}</td>
+            </tr>
+        );
+    } else if (students.length === 0 && !loading) {
         // (2) 목록이 비었다. 불러오는 중일 때는 안내를 내지 않는다.
-        if (students.length === 0 && !loading) {
-            return (
-                <tr>
-                    <td colSpan={COLUMN_COUNT} className="empty-row">등록된 학생이 없습니다.</td>
-                </tr>
-            );
-        }
-
+        rows = (
+            <tr>
+                <td colSpan={COLUMN_COUNT} className="empty-row">등록된 학생이 없습니다.</td>
+            </tr>
+        );
+    } else {
         // (3) 학생 한 명을 행 하나로 그린다.
-        return students.map((student) => (
+        rows = students.map((student) => (
             <tr key={student.id}>
                 <td>{student.name}</td>
                 <td>{student.studentNumber}</td>
@@ -79,7 +79,7 @@ function StudentTable({ students, loading, error, onDelete }) {
                         <th>액션</th>
                     </tr>
                 </thead>
-                <tbody>{renderRows()}</tbody>
+                <tbody>{rows}</tbody>
             </table>
         </div>
     );

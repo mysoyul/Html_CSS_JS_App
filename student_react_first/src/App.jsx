@@ -121,10 +121,21 @@ function App() {
 
     /* -----------------------------------------------------
        입력칸 한 개가 바뀔 때
+       입력칸 여섯 개가 모두 이 함수 하나를 부른다.
+       어느 칸인지는 event 가 알려 준다.
+
+         event.target       방금 글자를 친 input 요소
+         event.target.name  그 input 에 적어 둔 name 값
+         event.target.value 지금 칸에 들어 있는 글자
+
        state 는 직접 고치지 않고 언제나 새 객체로 바꾼다.
-       form.name = value 처럼 고치면 React 가 바뀐 줄 모른다.
+       form.name = ... 처럼 고치면 React 가 바뀐 줄 모른다.
        ----------------------------------------------------- */
-    function handleChange(name, value) {
+    function handleChange(event) {
+        // 어느 칸이 바뀌었는지, 값은 무엇인지 꺼낸다.
+        const name = event.target.name;
+        const value = event.target.value;
+
         // 기존 값을 그대로 복사한 새 객체를 만든다.
         const next = { ...form };
 

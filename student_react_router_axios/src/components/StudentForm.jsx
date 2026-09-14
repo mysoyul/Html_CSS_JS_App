@@ -13,8 +13,10 @@
 
 import MessageBox from "./MessageBox.jsx";
 
-/* 입력칸 한 개를 그리는 작은 컴포넌트.
-   여섯 칸이 생김새가 같으므로 한 번만 만들어 두고 여섯 번 쓴다.
+/* 입력칸 한 개를 그리는 작은 컴포넌트 — 실습 5-12 에서 만든 것 그대로다.
+   여섯 칸에서 달라지는 것은 name · label · type · required 네 가지뿐이라,
+   그것만 밖에서 받는다. value 와 onChange 는 받은 것을 그대로 넘긴다.
+
    컴포넌트 이름은 반드시 대문자로 시작해야 한다.
    소문자로 쓰면 React 가 <div> 같은 HTML 태그로 본다. */
 function Field({ name, label, type, required, value, onChange }) {
@@ -27,8 +29,7 @@ function Field({ name, label, type, required, value, onChange }) {
                 type={type}
                 required={required}
                 value={value}
-                // 값이 바뀌면 부모에게 알린다. 저장은 부모가 한다.
-                onChange={(event) => onChange(name, event.target.value)}
+                onChange={onChange}
             />
         </div>
     );

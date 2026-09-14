@@ -69,7 +69,12 @@ function StudentFormPage() {
         };
     }, [id, isEditing, showError]);
 
-    function handleChange(name, value) {
+    function handleChange(event) {
+        // 입력칸 여섯 개가 모두 이 함수 하나를 부른다.
+        // 어느 칸인지는 input 에 적어 둔 name 이 알려 준다.
+        const name = event.target.name;
+        const value = event.target.value;
+
         const next = { ...form };
         next[name] = value;
         setForm(next);

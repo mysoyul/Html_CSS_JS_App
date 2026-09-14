@@ -11,6 +11,10 @@
 | 5-6 | [`5-6_StudentForm.jsx`](5-6_StudentForm.jsx) | `src/components/StudentForm.jsx` |
 | 5-7 | [`5-7_MessageBox.jsx`](5-7_MessageBox.jsx) | `src/components/MessageBox.jsx` |
 | 5-10 | [`5-10_App.jsx`](5-10_App.jsx) | `src/App.jsx` (완성본) |
+| 5-12 | [`5-12_StudentFormField.jsx`](5-12_StudentFormField.jsx) | `src/components/StudentFormField.jsx` |
+
+`5-12_StudentFormField.jsx` 는 `5-6_StudentForm.jsx` 를 리팩토링한 것입니다. 하는 일이 같으므로
+**둘 중 하나만** `App.jsx` 에서 import 합니다. 두 벌을 나란히 두고 어느 쪽이 읽기 좋은지 견주어 보세요.
 
 ## 4부에서 그대로 가져오는 파일
 

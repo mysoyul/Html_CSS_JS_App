@@ -11,40 +11,23 @@
 
    이런 입력을 제어 컴포넌트(controlled component)라고 합니다.
    이 컴포넌트는 값을 저장하지 않습니다. 그리기만 합니다.
+
+   입력칸 여섯 개가 생김새는 같지만 일부러 하나씩 펼쳐 적었습니다.
+   위에서 아래로 한 번에 읽히는 것이 지금은 더 중요하기 때문입니다.
    --------------------------------------------------------- */
 
 import MessageBox from "./MessageBox.jsx";
 
-/* 입력칸 한 개를 그리는 작은 컴포넌트.
-   여섯 칸이 생김새가 같으므로 한 번만 만들어 두고 여섯 번 쓴다.
-   컴포넌트 이름은 반드시 대문자로 시작해야 한다.
-   소문자로 쓰면 React 가 <div> 같은 HTML 태그로 본다. */
-function Field({ name, label, type, required, value, onChange }) {
-    return (
-        <div className="form-group">
-            <label htmlFor={name}>{label}:</label>
-            <input
-                id={name}
-                name={name}
-                type={type}
-                required={required}
-                value={value}
-                // 값이 바뀌면 부모에게 알린다. 저장은 부모가 한다.
-                onChange={(event) => onChange(name, event.target.value)}
-            />
-        </div>
-    );
-}
-
-/* 부모(App)가 넘겨주는 값들
-     form         화면에 보일 입력값
-     isEditing    수정 모드인가
-     message      폼 아래 보여 줄 메시지
-     onChange     한 칸이 바뀔 때 부를 함수
-     onSubmit     제출할 때 부를 함수
-     onCancel     취소를 누를 때 부를 함수
-     containerRef 수정 시 이 위치로 스크롤하기 위한 참조 */
-function StudentForm({ form, isEditing, message, onChange, onSubmit, onCancel, containerRef }) {
+/* 부모(App)가 넘겨주는 값들 */
+function StudentForm({
+    form,          // 화면에 보일 입력값 여섯 개
+    isEditing,     // 수정 모드인가
+    message,       // 폼 아래 보여 줄 메시지
+    onChange,      // 입력칸이 바뀔 때 부를 함수
+    onSubmit,      // 제출할 때 부를 함수
+    onCancel,      // 취소를 누를 때 부를 함수
+    containerRef,  // 수정 시 이 위치로 스크롤하기 위한 참조
+}) {
     // 4부 setEditMode 가 classList.toggle 로 하던 일을 문자열로 표현한다.
     let containerClass = "form-container";
     if (isEditing) {
@@ -64,18 +47,81 @@ function StudentForm({ form, isEditing, message, onChange, onSubmit, onCancel, c
             {/* onSubmit 안에서 event.preventDefault() 를 부르는 것은 4부와 같다. */}
             <form onSubmit={onSubmit}>
                 <div className="form-grid">
-                    <Field name="name" label="이름" type="text" required={true}
-                           value={form.name} onChange={onChange} />
-                    <Field name="studentNumber" label="학번" type="text" required={true}
-                           value={form.studentNumber} onChange={onChange} />
-                    <Field name="address" label="주소" type="text" required={true}
-                           value={form.address} onChange={onChange} />
-                    <Field name="phoneNumber" label="전화번호" type="tel" required={true}
-                           value={form.phoneNumber} onChange={onChange} />
-                    <Field name="email" label="이메일" type="email" required={true}
-                           value={form.email} onChange={onChange} />
-                    <Field name="dateOfBirth" label="생년월일" type="date" required={false}
-                           value={form.dateOfBirth} onChange={onChange} />
+                    {/* 입력칸 한 개는 언제나 이 세 가지가 짝이다.
+                          value    = {form.어느칸}   보이는 값은 부모에게서 온다
+                          onChange = {onChange}      바뀌면 부모에게 알린다
+                          name     = "어느칸"        부모가 어느 칸인지 알아보는 이름 */}
+                    <div className="form-group">
+                        <label htmlFor="name">이름:</label>
+                        <input
+                            id="name"
+                            name="name"
+                            type="text"
+                            required
+                            value={form.name}
+                            onChange={onChange}
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="studentNumber">학번:</label>
+                        <input
+                            id="studentNumber"
+                            name="studentNumber"
+                            type="text"
+                            required
+                            value={form.studentNumber}
+                            onChange={onChange}
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="address">주소:</label>
+                        <input
+                            id="address"
+                            name="address"
+                            type="text"
+                            required
+                            value={form.address}
+                            onChange={onChange}
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="phoneNumber">전화번호:</label>
+                        <input
+                            id="phoneNumber"
+                            name="phoneNumber"
+                            type="tel"
+                            required
+                            value={form.phoneNumber}
+                            onChange={onChange}
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="email">이메일:</label>
+                        <input
+                            id="email"
+                            name="email"
+                            type="email"
+                            required
+                            value={form.email}
+                            onChange={onChange}
+                        />
+                    </div>
+
+                    {/* 생년월일만 required 가 없다. 비워 두어도 된다. */}
+                    <div className="form-group">
+                        <label htmlFor="dateOfBirth">생년월일:</label>
+                        <input
+                            id="dateOfBirth"
+                            name="dateOfBirth"
+                            type="date"
+                            value={form.dateOfBirth}
+                            onChange={onChange}
+                        />
+                    </div>
                 </div>
 
                 <div className="button-group">

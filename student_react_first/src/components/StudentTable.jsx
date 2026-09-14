@@ -22,31 +22,30 @@ const COLUMN_COUNT = 7;
      onEdit    수정 버튼을 눌렀을 때 부를 함수
      onDelete  삭제 버튼을 눌렀을 때 부를 함수 */
 function StudentTable({ students, loading, error, onEdit, onDelete }) {
-    // tbody 안에 무엇을 그릴지 세 경우로 나눠서 정한다.
-    // JSX 안에 && 를 여러 개 이어 쓰면 읽기 어려우므로 함수로 빼냈다.
-    function renderRows() {
-        // (1) 목록을 못 불러왔다
-        if (error) {
-            return (
-                <tr>
-                    <td colSpan={COLUMN_COUNT} className="error-row">{error}</td>
-                </tr>
-            );
-        }
+    /* tbody 안에 무엇을 그릴지 세 경우로 나눠서 정한다.
+       JSX 안에 && 와 ? : 를 이어 쓰면 읽기 어려우므로,
+       먼저 rows 에 담아 두고 아래 표 안에 끼워 넣는다. */
+    let rows;
 
+    if (error) {
+        // (1) 목록을 못 불러왔다
+        rows = (
+            <tr>
+                <td colSpan={COLUMN_COUNT} className="error-row">{error}</td>
+            </tr>
+        );
+    } else if (students.length === 0 && !loading) {
         // (2) 목록이 비었다. 불러오는 중일 때는 안내를 내지 않는다.
         //     그래야 화면이 잠깐 깜빡이지 않는다.
-        if (students.length === 0 && !loading) {
-            return (
-                <tr>
-                    <td colSpan={COLUMN_COUNT} className="empty-row">등록된 학생이 없습니다.</td>
-                </tr>
-            );
-        }
-
+        rows = (
+            <tr>
+                <td colSpan={COLUMN_COUNT} className="empty-row">등록된 학생이 없습니다.</td>
+            </tr>
+        );
+    } else {
         // (3) 학생 한 명을 행 하나로 그린다.
         //     map 은 배열의 값 하나하나를 화면 조각으로 바꿔 준다.
-        return students.map((student) => (
+        rows = students.map((student) => (
             // key 는 React 가 어느 행이 어느 행인지 알아보는 표시다.
             // 없으면 목록이 바뀔 때 엉뚱한 행이 다시 그려질 수 있다.
             <tr key={student.id}>
@@ -88,7 +87,7 @@ function StudentTable({ students, loading, error, onEdit, onDelete }) {
                         <th>액션</th>
                     </tr>
                 </thead>
-                <tbody>{renderRows()}</tbody>
+                <tbody>{rows}</tbody>
             </table>
         </div>
     );
