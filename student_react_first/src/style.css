@@ -217,8 +217,11 @@ tr:hover {
     /* 상대적으로 작은 폰트 크기 */
     margin-top: 5px;
     /* 위쪽 여백 */
-    display: none;
-    /* 기본적으로 숨김 */
+
+    /* 4부에는 여기에 display: none 이 있었다.
+       span 이 index.html 에 늘 있었고 showError() 가 block 으로 바꿔 주었기 때문이다.
+       React 에서는 MessageBox 가 보여 줄 것이 없으면 아예 그리지 않는다.
+       그리기로 한 것을 CSS 가 다시 가리면 안 되므로 그 줄을 뺀다. */
 }
 
 /* 취소 버튼 스타일 */
@@ -320,4 +323,26 @@ tr:hover {
 .form-container.editing {
     border-left: 4px solid #28a745;
     /* 왼쪽에 녹색 띠 */
+}
+
+/* 제목 옆에 붙는 모드 표시(TEST / PROD) */
+.app-mode {
+    font-size: 0.5em;
+    /* 제목보다 훨씬 작게 — em 은 부모 글자 크기의 배수다 */
+    vertical-align: middle;
+    /* 제목 글자의 가운데 높이에 맞춘다 */
+    padding: 3px 10px;
+    border-radius: 12px;
+    color: white;
+    letter-spacing: 1px;
+}
+
+/* 개발 모드 — 눈에 띄지 않는 회색 */
+.app-mode.test {
+    background-color: #6c757d;
+}
+
+/* 운영 모드 — 실수로 운영을 건드리지 않도록 빨간색 */
+.app-mode.prod {
+    background-color: #dc3545;
 }

@@ -217,8 +217,11 @@ tr:hover {
     /* 상대적으로 작은 폰트 크기 */
     margin-top: 5px;
     /* 위쪽 여백 */
-    display: none;
-    /* 기본적으로 숨김 */
+
+    /* 4부에는 여기에 display: none 이 있었다.
+       span 이 index.html 에 늘 있었고 showError() 가 block 으로 바꿔 주었기 때문이다.
+       React 에서는 MessageBox 가 보여 줄 것이 없으면 아예 그리지 않는다.
+       그리기로 한 것을 CSS 가 다시 가리면 안 되므로 그 줄을 뺀다. */
 }
 
 /* 취소 버튼 스타일 */
@@ -322,8 +325,30 @@ tr:hover {
     /* 왼쪽에 녹색 띠 */
 }
 
+/* 제목 옆에 붙는 모드 표시(TEST / PROD) */
+.app-mode {
+    font-size: 0.5em;
+    /* 제목보다 훨씬 작게 — em 은 부모 글자 크기의 배수다 */
+    vertical-align: middle;
+    /* 제목 글자의 가운데 높이에 맞춘다 */
+    padding: 3px 10px;
+    border-radius: 12px;
+    color: white;
+    letter-spacing: 1px;
+}
+
+/* 개발 모드 — 눈에 띄지 않는 회색 */
+.app-mode.test {
+    background-color: #6c757d;
+}
+
+/* 운영 모드 — 실수로 운영을 건드리지 않도록 빨간색 */
+.app-mode.prod {
+    background-color: #dc3545;
+}
+
 /* ===========================================================
-   6부에서 더한 것 — 페이지가 여러 개가 되면서 필요해진 스타일
+   라우터를 추가 이후에  — 페이지가 여러 개가 되면서 필요해진 스타일
    =========================================================== */
 
 /* 어느 페이지에서나 보이는 머리말 */
@@ -425,4 +450,17 @@ a.edit-btn {
 
 .back-link:hover {
     text-decoration: underline;
+}
+
+/* 제목과 모드 배지를 한 덩어리로 묶는다.
+   머리말이 space-between 이라 자식이 둘이어야 배치가 유지된다. */
+.app-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* 머리말 안에서는 부모 글자가 작아 0.5em 이 너무 작다. 크기만 따로 준다. */
+.app-brand .app-mode {
+    font-size: 0.8rem;
 }

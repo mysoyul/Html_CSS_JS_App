@@ -32,6 +32,9 @@ import { EMPTY_FORM, toRequest, toFormValues } from "./lib/studentData.js";
 import StudentForm from "./components/StudentForm.jsx";
 import StudentTable from "./components/StudentTable.jsx";
 
+// 지금 어느 모드로 도는지 (TEST / PROD)
+import { APP_MODE } from "./config.js";
+
 import "./style.css";
 
 // 성공 메시지가 저절로 사라지기까지의 시간(ms) — 4부와 같다.
@@ -241,9 +244,16 @@ function App() {
        자식 컴포넌트에게 값과 함수를 내려 주는 것을 props 라고 한다.
        아래의 <> </> 는 태그 하나로 묶기 위한 빈 껍데기다(프래그먼트).
        ----------------------------------------------------- */
+
+    // 제목 옆에 붙일 배지의 class. 운영이면 빨강, 아니면 회색.
+    let modeClass = "app-mode test";
+    if (APP_MODE === "PROD") {
+        modeClass = "app-mode prod";
+    }
+
     return (
         <>
-            <h1>학생 관리 시스템</h1>
+            <h1>학생 관리 시스템 <span className={modeClass}>{APP_MODE}</span></h1>
 
             <StudentForm
                 form={form}
