@@ -51,9 +51,27 @@ import {
     setLoading,
 } from "./ui/message.js";
 
+// 지금 어느 모드로 도는지 (TEST / PROD)
+import { APP_MODE } from "./config.js";
+
 // 이 파일이 기억하는 유일한 상태다.
 // 값이 있으면 수정 모드, null 이면 등록 모드다.
 let editingStudentId = null;
+
+
+/* ── 모드 표시 ──────────────────────────────────────────── */
+
+// 제목 옆에 TEST 또는 PROD 를 적는다.
+// 값은 .env 파일에서 오고, Vite 가 빌드할 때 넣어 준다.
+const appModeBadge = document.getElementById("appMode");
+appModeBadge.textContent = APP_MODE;
+
+// 모드에 따라 색을 다르게 한다. classList.add 로 클래스를 하나 더 붙인다.
+if (APP_MODE === "PROD") {
+    appModeBadge.classList.add("prod");
+} else {
+    appModeBadge.classList.add("test");
+}
 
 
 /* ── 목록 불러오기 ──────────────────────────────────────── */
